@@ -1095,11 +1095,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.Validations\\Challenge.Validations.csproj",
+      "projectUniqueName": "D:\\Challenge\\Challenge.Validations\\Challenge.Validations.csproj",
       "projectName": "Challenge.Validations",
-      "projectPath": "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.Validations\\Challenge.Validations.csproj",
+      "projectPath": "D:\\Challenge\\Challenge.Validations\\Challenge.Validations.csproj",
       "packagesPath": "C:\\Users\\MYPC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.Validations\\obj\\",
+      "outputPath": "D:\\Challenge\\Challenge.Validations\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MYPC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1116,8 +1116,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.Core\\Challenge.Core.csproj": {
-              "projectPath": "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.Core\\Challenge.Core.csproj"
+            "D:\\Challenge\\Challenge.Core\\Challenge.Core.csproj": {
+              "projectPath": "D:\\Challenge\\Challenge.Core\\Challenge.Core.csproj"
             }
           }
         }

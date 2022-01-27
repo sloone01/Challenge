@@ -1077,11 +1077,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.Core\\Challenge.Core.csproj",
+      "projectUniqueName": "D:\\Challenge\\Challenge.Core\\Challenge.Core.csproj",
       "projectName": "Challenge.Core",
-      "projectPath": "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.Core\\Challenge.Core.csproj",
+      "projectPath": "D:\\Challenge\\Challenge.Core\\Challenge.Core.csproj",
       "packagesPath": "C:\\Users\\MYPC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.Core\\obj\\",
+      "outputPath": "D:\\Challenge\\Challenge.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MYPC\\AppData\\Roaming\\NuGet\\NuGet.Config",

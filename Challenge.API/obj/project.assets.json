@@ -1351,11 +1351,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.API\\Challenge.API.csproj",
+      "projectUniqueName": "D:\\Challenge\\Challenge.API\\Challenge.API.csproj",
       "projectName": "Challenge.API",
-      "projectPath": "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.API\\Challenge.API.csproj",
+      "projectPath": "D:\\Challenge\\Challenge.API\\Challenge.API.csproj",
       "packagesPath": "C:\\Users\\MYPC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.API\\obj\\",
+      "outputPath": "D:\\Challenge\\Challenge.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\MYPC\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1372,14 +1372,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.Core\\Challenge.Core.csproj": {
-              "projectPath": "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.Core\\Challenge.Core.csproj"
+            "D:\\Challenge\\Challenge.Core\\Challenge.Core.csproj": {
+              "projectPath": "D:\\Challenge\\Challenge.Core\\Challenge.Core.csproj"
             },
-            "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.UseCases\\Challenge.UseCases.csproj": {
-              "projectPath": "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.UseCases\\Challenge.UseCases.csproj"
+            "D:\\Challenge\\Challenge.UseCases\\Challenge.UseCases.csproj": {
+              "projectPath": "D:\\Challenge\\Challenge.UseCases\\Challenge.UseCases.csproj"
             },
-            "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.Validations\\Challenge.Validations.csproj": {
-              "projectPath": "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.Validations\\Challenge.Validations.csproj"
+            "D:\\Challenge\\Challenge.Validations\\Challenge.Validations.csproj": {
+              "projectPath": "D:\\Challenge\\Challenge.Validations\\Challenge.Validations.csproj"
             }
           }
         }

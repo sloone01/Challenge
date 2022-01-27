@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "H/rtDKagiSXjxXnWCT8miAGuYbrItLd1qYCkr3H3ksISFL8DQyTPp9OD5auKEjXWXywk8GfFMfAZKgEAIBjekQ==",
+  "dgSpecHash": "E6D/LwwRJ9V8UoCX+exfWnBs5FBjO4BDT+e9ioXNAnrY8iaYg5CTfWuRolJjKEGGpbSRp/Wcd58xDHiJU40hqA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MYPC\\source\\repos\\Challenge\\Challenge.Repos\\Challenge.Repos.csproj",
+  "projectFilePath": "D:\\Challenge\\Challenge.Repos\\Challenge.Repos.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MYPC\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.1\\microsoft.data.sqlite.core.6.0.1.nupkg.sha512",
     "C:\\Users\\MYPC\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.1\\microsoft.entityframeworkcore.6.0.1.nupkg.sha512",
