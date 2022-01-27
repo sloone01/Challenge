@@ -211,14 +211,14 @@
       "netstandard.dll": "sha256-E5RFhGIaDH5QM6BEbFUuHU8U9wP6N6jbo5MCttzLOCM=",
       "System.Private.CoreLib.dll": "sha256-9NtEbYixyog7vUmeYXyyqzfBXUYl8wxoVQ26Ji7sNRg=",
       "Challenge.Core.dll": "sha256-Oj2l2sMkMSQwAatsoSLTtelBFpQ9zcd1dHW0VxuOIqE=",
-      "Challenge.dll": "sha256-SPpKlz9ZKqQo8tkJ9Gx4IamDnSjenkqULymTSO\/J7dI="
+      "Challenge.dll": "sha256-77HMZIjLs9chj9t+QKxw9Bd+QTY6GtAoW85DJMry3Yk="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
       "Challenge.Core.pdb": "sha256-6+ITJeN8wOKPzqYkunc+ODN8IS0a+GoWCck1Z1lOJdY=",
-      "Challenge.pdb": "sha256-gf40atTZ5tqI0GqVHfb8udPCxrnCOcLYYzzrvTeC8aY="
+      "Challenge.pdb": "sha256-C0Ju3yTTXbTH4N6NFD6Vo3KO7X3ppQDOWRRde9M\/VRo="
     },
     "runtime": {
       "dotnet.6.0.1.78s8dpfkwm.js": "sha256-awQsJ\/WxYhouHPuE+i3eJqjA4XClQlr2rD6nKvW80ww=",
