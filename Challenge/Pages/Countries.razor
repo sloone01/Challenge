@@ -1,0 +1,112 @@
+﻿@page "/Countries"
+@using Challenge.Core.Shared
+@using Challenge.Dialogs
+@using Challenge.Services
+@inject IService<Country> CountryService
+@inject IDialogService DialogService
+@inject NavigationManager NavManager
+
+
+        
+
+
+<h3 style="margin-top: 20px">Countries List</h3>
+<MudButton @onclick="addCountry" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Add" Color="Color.Primary">Add Country</MudButton>
+<MudTable Items="@CountryRecords" FixedHeader="true">
+    <HeaderContent>
+        <MudTh>Id</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Actions</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Actions">
+            <MudIconButton @onclick="@(e => UpdateCountry(@context))" Icon="@Icons.Filled.Edit" Color="Color.Primary"></MudIconButton>
+            <MudIconButton @onclick="@(e => DeleteCountry(@context.Id))" Icon="@Icons.Filled.Delete" Color="Color.Secondary"></MudIconButton>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[]{50, 100}" />
+    </PagerContent>
+</MudTable>
+
+    
+
+@code {
+    
+    private List<Country>? CountryRecords = new();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        CountryRecords =await CountryService.Fetch();
+    }
+
+
+
+
+    private void addCountry()
+    {
+        NavManager.NavigateTo("/AddCountry");
+    }
+
+
+
+    private async void DeleteCountry(int Id)
+    {
+
+        var Response = await CountryService.Delete(Id);
+        string Message = "Error While Deleting";
+        bool IsSuccess = false;
+
+        if (Response.IsSuccess)
+        {
+            CountryRecords = await CountryService.Fetch() ;
+            Message = "Deleted Succesfully";
+            StateHasChanged();
+            IsSuccess = true;
+
+        } else
+        {
+            Message = Response.ErrorMessage;
+        }
+
+        ShowRespnsedialog(Message, IsSuccess);
+
+    }
+    private async void UpdateCountry(Country countryd){
+
+        string Message = "Error While Updating";
+        bool IsSuccess = false;
+
+        var IsUpdated = await ShowUpdateCountryDialog(countryd);
+        if (IsUpdated)
+        {
+            CountryRecords = await CountryService.Fetch();
+            Message = "Updated Succesfully";
+            IsSuccess = true;
+            StateHasChanged();
+        }
+
+        ShowRespnsedialog(Message, IsSuccess);
+    }
+    private async Task<bool> ShowUpdateCountryDialog(Country country)
+    {
+       
+
+        var parameters = new DialogParameters {{"model", country}};
+        var options = new DialogOptions {MaxWidth = MaxWidth.Medium, FullWidth = false};
+        var value = await DialogService.Show<UpdateCountryDialog>("Update Country Details ", parameters, options).Result;
+        return value.Data.ToString().Equals("True");
+    }
+
+        private async void ShowRespnsedialog(string Message,bool IsSuccess)
+    {
+        var parameters = new DialogParameters {{"message",Message},{ "IsSuccess",IsSuccess} };
+        var options = new DialogOptions {MaxWidth = MaxWidth.Medium, FullWidth = false};
+        var value = await DialogService.Show<ResponseDialog>("Response Dialog", parameters, options).Result;
+
+    }
+
+}

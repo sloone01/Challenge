@@ -1,0 +1,47 @@
+﻿@using Challenge.Core.Shared
+@using Challenge.Services
+@inject IService<Country> CountryService
+
+<MudLayout RightToLeft="true">
+    <MudDialog>
+        <DialogContent>
+            <EditForm Model="@model">
+        <DataAnnotationsValidator/>
+        <MudGrid>
+            <MudItem xs="12" sm="11">
+                <MudCard>
+                    <MudCardContent>
+                        <MudTextField Label="Name"
+                              @bind-Value="model.Name" For="@(() => model.Name)"/>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
+    </EditForm>          
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="Cancel">Cancel</MudButton>
+            <MudButton OnClick="Update">Update</MudButton>
+        </DialogActions>
+    </MudDialog>
+</MudLayout>
+
+@code {
+    [CascadingParameter] MudDialogInstance Dialog { get; set; }
+    [Parameter] public Country model { get; set; } = new();
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+    }
+
+    private async void Update(){
+        var Response = await CountryService.Update(model);
+        if (Response.IsSuccess)
+            Dialog.Close(DialogResult.Ok(true));
+    }
+
+    private void Cancel() => Dialog.Close(DialogResult.Cancel());
+}

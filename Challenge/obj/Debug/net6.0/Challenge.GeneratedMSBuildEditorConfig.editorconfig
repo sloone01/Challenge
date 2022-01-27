@@ -1,0 +1,83 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = browser
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = true
+build_property.IncludeAllContentForSelfExtract = 
+build_property.RootNamespace = Challenge
+build_property.RootNamespace = Challenge
+build_property.ProjectDir = D:\Challenge\Challenge\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\Challenge\Challenge
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/Challenge/Challenge/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Challenge/Challenge/Dialogs/ResponseDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = RGlhbG9nc1xSZXNwb25zZURpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Challenge/Challenge/Dialogs/UpdateClassDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = RGlhbG9nc1xVcGRhdGVDbGFzc0RpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Challenge/Challenge/Dialogs/UpdateCountryDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = RGlhbG9nc1xVcGRhdGVDb3VudHJ5RGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Challenge/Challenge/Dialogs/UpdateStudentDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = RGlhbG9nc1xVcGRhdGVTdHVkZW50RGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Challenge/Challenge/Pages/AddClass.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkQ2xhc3MucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Challenge/Challenge/Pages/AddCountry.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkQ291bnRyeS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Challenge/Challenge/Pages/AddStudent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRkU3R1ZGVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Challenge/Challenge/Pages/Classes.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xhc3Nlcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Challenge/Challenge/Pages/Countries.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRyaWVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Challenge/Challenge/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Challenge/Challenge/Pages/ViewStudents.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmlld1N0dWRlbnRzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Challenge/Challenge/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Challenge/Challenge/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Challenge/Challenge/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-ehseh37lt8
+
+[D:/Challenge/Challenge/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-heepm5fc7t

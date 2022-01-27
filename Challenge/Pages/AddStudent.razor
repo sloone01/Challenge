@@ -1,0 +1,89 @@
+﻿@page "/AddStudent"
+@using Challenge.Core.Shared
+@using Challenge.Dialogs
+@using Challenge.Services
+@inject IService<Student> StudentService
+@inject IService<Country> CountryService
+@inject IService<ClassRecord> ClassService
+@inject IDialogService DialogService
+@inject NavigationManager NavManager
+<h3>AddStudent</h3>
+<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+<DataAnnotationsValidator/>
+<MudGrid>
+    <MudItem xs="12" sm="7">
+        <MudCard>
+            <MudCardContent>
+                <MudTextField Label="Name"
+                              @bind-Value="model.Name" For="@(() => model.Name)"/>
+                <MudDatePicker Label="Date Of Birth" @bind-Date="@model.DateOfBirth" />
+                <MudSelect Margin="Margin.Dense" T="int" Label="Country" @bind-Value="model.CountryId">
+                    @foreach (var country in Countries)
+                    {
+                        <MudSelectItem T="int" Value="@country.Id">@country.Name</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudSelect Margin="Margin.Dense" T="int" Label="Country" @bind-Value="model.ClassId">
+                     @foreach (var classRecord in Classes)
+                    {
+                        <MudSelectItem T="int" Value="@classRecord.Id">@classRecord.Name</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Add</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" sm="5">
+            @if (success)
+            {
+                <MudText Color="Color.Success">Success</MudText>
+            }
+            else
+            {
+                <MudText Color="@Color.Error">
+                    <ValidationSummary />
+                </MudText>
+            }
+    </MudItem>
+</MudGrid>
+</EditForm>
+
+@code {
+    private Student model = new Student();
+    private List<ClassRecord>? Classes = new();
+    private List<Country>? Countries = new();
+    private bool success;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Countries = await CountryService.Fetch();
+        Classes = await ClassService.Fetch();
+    }
+
+    private async void OnValidSubmit(EditContext context)
+    {
+
+        string Message = "";
+        bool IsSuccess = false;
+
+        var IsAdded = await StudentService.Add(model);
+        if (IsAdded.IsSuccess)
+        {
+            Message = "Inserted Succesfully";
+            IsSuccess = true;
+            model = new Student();
+        }
+        else
+        {
+             Message = IsAdded.ErrorMessage;
+        }
+        var parameters = new DialogParameters {{"message",Message},{ "IsSuccess",IsSuccess} };
+        var options = new DialogOptions {MaxWidth = MaxWidth.Medium, FullWidth = false};
+        var value = await DialogService.Show<ResponseDialog>("Response Dialog", parameters, options).Result;
+
+           
+    }
+    
+}

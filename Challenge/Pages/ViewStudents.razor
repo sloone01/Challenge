@@ -1,0 +1,155 @@
+﻿@page "/ViewStudents"
+@using Challenge.Core.Shared
+@using Challenge.Dialogs
+@using Challenge.Services
+@inject IService<Student> StudentService
+@inject IService<ClassRecord> ClassService
+@inject IService<Country> CountryService
+@inject IDialogService DialogService
+@inject NavigationManager NavManager
+
+
+        
+
+
+<h3 style="margin-top: 20px">ViewStudents</h3>
+<MudButton @onclick="addStudent" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Add" Color="Color.Primary">Add Student</MudButton>
+<MudTable Items="@Students" FixedHeader="true">
+    <HeaderContent>
+        <MudTh>Id</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Date Of Birth</MudTh>
+        <MudTh>Class Name</MudTh>
+        <MudTh>Country Name</MudTh>
+        <MudTh>Actions</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Date Of Birth">@context.DateOfBirth</MudTd>
+        <MudTd DataLabel="Class Name">@context.className</MudTd>
+        <MudTd DataLabel="Country Name">@context.CountryName</MudTd>
+        <MudTd DataLabel="Actions">
+            <MudIconButton @onclick="@(e => UpdateStudent(@context))" Icon="@Icons.Filled.Edit" Color="Color.Primary"></MudIconButton>
+            <MudIconButton @onclick="@(e => DeleteStudent(@context.Id))" Icon="@Icons.Filled.Delete" Color="Color.Secondary"></MudIconButton>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[]{50, 100}" />
+    </PagerContent>
+</MudTable>
+<h4 style="margin-top: 20px">Count Of Students Per Class</h4>
+@foreach (var ClassName in  Students.GroupBy(x => x.ClassId)){
+<MudText Color="Color.Secondary"><h4>@GetClassName(@ClassName.Key) : @ClassName.Count()</h4></MudText>
+}
+<h4 style="margin-top: 20px">Count Of Students Per Country</h4>
+@foreach (var ClassName in  Students.GroupBy(x => x.CountryId)){
+<MudText Color="Color.Secondary"><h4>@GetCountryName(@ClassName.Key) : @ClassName.Count()</h4></MudText>
+}
+<h4 style="margin-top: 20px">Average Age:</h4>
+<MudText Color="Color.Secondary"><h4>@Average</h4></MudText>
+
+    
+
+@code {
+    private List<Student>? Students = new List<Student>();
+    private List<ClassRecord>? Classes = new();
+    private List<Country>? Countries = new();
+    private int Average = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Students =await StudentService.Fetch();
+        Average = (int)Students.Select(GetAge).Average();
+    }
+
+    private string GetClassName(int id)
+    {
+        var Student = Students.Where(s => s.ClassId == id).FirstOrDefault();
+        return Student.className;
+    }
+
+    private string GetCountryName(int id)
+    {
+        var Student = Students.Where(s => s.CountryId == id).FirstOrDefault();
+        return Student.CountryName;
+    }
+
+
+
+    private void addStudent()
+    {
+        NavManager.NavigateTo("/AddStudent");
+    }
+
+    private int GetAge(Student student)
+    {
+        var BirthDayDate = student.DateOfBirth;
+        int now = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
+        int dob = int.Parse(((DateTime)(BirthDayDate)).ToString("yyyyMMdd"));
+        int age = (now - dob) / 10000;
+        Console.WriteLine(age);
+        return age;
+    }
+
+
+    private async void DeleteStudent(int Id)
+    {
+
+        var Response = await StudentService.Delete(Id);
+        string Message = "Error While Deleting";
+        bool IsSuccess = false;
+
+        if (Response.IsSuccess)
+        {
+            Students = await StudentService.Fetch() ;
+            Message = "Deleted Succesfully";
+            StateHasChanged();
+            IsSuccess = true;
+
+        } else
+        {
+            Message = Response.ErrorMessage;
+        }
+
+        ShowRespnsedialog(Message, IsSuccess);
+
+    }
+
+    private async void UpdateStudent(Student student){
+
+        string Message = "Error While Updating";
+        bool IsSuccess = false;
+
+        var IsUpdated = await ShowUpdateStudentDialog(student);
+        if (IsUpdated)
+        {
+            Students = await StudentService.Fetch();
+            Message = "Updated Succesfully";
+            IsSuccess = true;
+            StateHasChanged();
+        }
+
+        ShowRespnsedialog(Message, IsSuccess);
+    }
+    private async Task<bool> ShowUpdateStudentDialog(Student student)
+    {
+
+        Countries = await CountryService.Fetch();
+        Classes = await ClassService.Fetch();
+
+        var parameters = new DialogParameters {{"model", student},{ "Countries",Countries},{"Classes",Classes } };
+        var options = new DialogOptions {MaxWidth = MaxWidth.Medium, FullWidth = false};
+        var value = await DialogService.Show<UpdateStudentDialog>("Update Student Details ", parameters, options).Result;
+        return value.Data.ToString().Equals("True");
+    }
+
+        private async void ShowRespnsedialog(string Message,bool IsSuccess)
+    {
+        var parameters = new DialogParameters {{"message",Message},{ "IsSuccess",IsSuccess} };
+        var options = new DialogOptions {MaxWidth = MaxWidth.Medium, FullWidth = false};
+        var value = await DialogService.Show<ResponseDialog>("Response Dialog", parameters, options).Result;
+
+    }
+
+}

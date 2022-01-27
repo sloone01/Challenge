@@ -1,0 +1,64 @@
+﻿@using Challenge.Core.Shared
+@using Challenge.Services
+@inject IService<Student> StudentService
+
+<MudLayout RightToLeft="true">
+    <MudDialog>
+        <DialogContent>
+            <EditForm Model="@model">
+        <DataAnnotationsValidator/>
+        <MudGrid>
+            <MudItem xs="12" sm="11">
+                <MudCard>
+                    <MudCardContent>
+                        <MudTextField Label="Name"
+                              @bind-Value="model.Name" For="@(() => model.Name)"/>
+                        <MudDatePicker Label="Date Of Birth" @bind-Date="@model.DateOfBirth" />
+                        <MudSelect Margin="Margin.Dense" T="int" Label="Country" @bind-Value="model.CountryId">
+                            @foreach (var country in Countries)
+                            {
+                                <MudSelectItem T="int" Value="@country.Id">@country.Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                        <MudSelect Margin="Margin.Dense" T="int" Label="Country" @bind-Value="model.ClassId">
+                            @foreach (var classRecord in Classes)
+                            {
+                                <MudSelectItem T="int" Value="@classRecord.Id">@classRecord.Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
+    </EditForm>          
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="Cancel">Cancel</MudButton>
+            <MudButton OnClick="Update">Update</MudButton>
+        </DialogActions>
+    </MudDialog>
+</MudLayout>
+
+@code {
+    [CascadingParameter] MudDialogInstance Dialog { get; set; }
+    [Parameter] public Student model { get; set; } = new();
+    [Parameter] public List<ClassRecord> Classes { get; set; } = new();
+    [Parameter] public List<Country> Countries { get; set; } = new();
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+
+    }
+
+
+    private async void Update(){
+        var result =await StudentService.Update(model);
+        if (result.IsSuccess)
+            Dialog.Close(DialogResult.Ok(true));
+    }
+
+    private void Cancel() => Dialog.Close(DialogResult.Cancel());
+}

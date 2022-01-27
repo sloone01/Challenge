@@ -1,0 +1,69 @@
+﻿@page "/AddClass"
+@using Challenge.Core.Shared
+@using Challenge.Dialogs
+@using Challenge.Services
+@inject IService<ClassRecord> ClassService
+@inject IDialogService DialogService
+@inject NavigationManager NavManager
+<h3>AddStudent</h3>
+<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+<DataAnnotationsValidator/>
+<MudGrid>
+    <MudItem xs="12" sm="7">
+        <MudCard>
+            <MudCardContent>
+                <MudTextField Label="Name"
+                              @bind-Value="model.Name" For="@(() => model.Name)"/>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Add</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+    <MudItem xs="12" sm="5">
+            @if (success)
+            {
+                <MudText Color="Color.Success">Success</MudText>
+            }
+            else
+            {
+                <MudText Color="@Color.Error">
+                    <ValidationSummary />
+                </MudText>
+            }
+    </MudItem>
+</MudGrid>
+</EditForm>
+
+@code {
+    private ClassRecord model = new ClassRecord();
+    private bool success;
+
+    protected override async Task OnInitializedAsync()
+    {
+    }
+
+    private async void OnValidSubmit(EditContext context)
+    {
+        string Message = "";
+        bool IsSuccess = false;
+
+        var IsAdded = await ClassService.Add(model);
+        if (IsAdded.IsSuccess)
+        {
+            Message = "Inserted Succesfully";
+            IsSuccess = true;
+            model = new ClassRecord();
+        }
+        else
+        {
+             Message = IsAdded.ErrorMessage;
+        }
+        var parameters = new DialogParameters {{"message",Message},{ "IsSuccess",IsSuccess} };
+        var options = new DialogOptions {MaxWidth = MaxWidth.Medium, FullWidth = false};
+        var value = await DialogService.Show<ResponseDialog>("Response Dialog", parameters, options).Result;
+
+           
+    }
+    
+}

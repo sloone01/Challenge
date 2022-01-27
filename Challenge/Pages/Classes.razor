@@ -1,0 +1,114 @@
+﻿@page "/Classes"
+@using Challenge.Core.Shared
+@using Challenge.Dialogs
+@using Challenge.Services
+@inject IService<ClassRecord> ClassService
+@inject IDialogService DialogService
+@inject NavigationManager NavManager
+
+
+        
+
+
+<h3 style="margin-top: 20px">Classes List</h3>
+<MudButton @onclick="addClass" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Add" Color="Color.Primary">Add Class</MudButton>
+<MudTable Items="@ClassRecords" FixedHeader="true">
+    <HeaderContent>
+        <MudTh>Id</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Actions</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Actions">
+            <MudIconButton @onclick="@(e => UpdateClass(@context))" Icon="@Icons.Filled.Edit" Color="Color.Primary"></MudIconButton>
+            <MudIconButton @onclick="@(e => DeleteClass(@context.Id))" Icon="@Icons.Filled.Delete" Color="Color.Secondary"></MudIconButton>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[]{50, 100}" />
+    </PagerContent>
+</MudTable>
+
+    
+
+@code {
+
+    private List<ClassRecord>? ClassRecords = new();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        ClassRecords =await ClassService.Fetch();
+    }
+
+
+
+
+    private void addClass()
+    {
+        NavManager.NavigateTo("/AddClass");
+    }
+
+
+
+    private async void DeleteClass(int Id)
+    {
+
+        var Response = await ClassService.Delete(Id);
+        string Message = "";
+        bool IsSuccess = false;
+
+        if (Response.IsSuccess)
+        {
+            ClassRecords = await ClassService.Fetch();
+            Message = "Deleted Succesfully";
+            StateHasChanged();
+            IsSuccess = true;
+
+        }
+        else
+        {
+            Message = Response.ErrorMessage;
+        }
+
+
+        ShowRespnsedialog(Message, IsSuccess);
+
+    }
+    private async void UpdateClass(ClassRecord classRecord){
+
+        string Message = "Error While Updating";
+        bool IsSuccess = false;
+
+        var IsUpdated = await ShowUpdateClassDialog(classRecord);
+        if (IsUpdated)
+        {
+            ClassRecords = await ClassService.Fetch();
+            Message = "Updated Succesfully";
+            IsSuccess = true;
+            StateHasChanged();
+        }
+
+        ShowRespnsedialog(Message, IsSuccess);
+    }
+    private async Task<bool> ShowUpdateClassDialog(ClassRecord classRecord)
+    {
+       
+
+        var parameters = new DialogParameters {{"model", classRecord}};
+        var options = new DialogOptions {MaxWidth = MaxWidth.Medium, FullWidth = false};
+        var value = await DialogService.Show<UpdateClassDialog>("Update CLass Details ", parameters, options).Result;
+        return value.Data.ToString().Equals("True");
+    }
+
+        private async void ShowRespnsedialog(string Message,bool IsSuccess)
+    {
+        var parameters = new DialogParameters {{"message",Message},{ "IsSuccess",IsSuccess} };
+        var options = new DialogOptions {MaxWidth = MaxWidth.Medium, FullWidth = false};
+        var value = await DialogService.Show<ResponseDialog>("Response Dialog", parameters, options).Result;
+
+    }
+
+}
